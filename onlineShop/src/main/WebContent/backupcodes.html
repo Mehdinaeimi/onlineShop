@@ -1,0 +1,108 @@
+<!-- backupcodes.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BackUpCodes Page</title>
+    <link rel="icon" type="image/x-icon" href="dpi-logo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <style>
+        .logo {
+            width: 50px;
+            height: 50px;
+            margin: 10px;
+            border-radius: 50%;
+        }
+        .backup-codes {
+            margin-top: 20px;
+        }
+        .backup-code {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">
+        <img src="dpi-logo.png" alt="Logo" class="logo">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="register.html">Register <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <h1 class="text-center">BackUpCodes</h1>
+    <p class="text-center">Your BackUpCodes:</p>
+    <div class="backup-codes">
+        <div class="backup-code">
+            <label>BackupCode1:</label>
+            <span id="backup-code-1"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode2:</label>
+            <span id="backup-code-2"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode3:</label>
+            <span id="backup-code-3"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode4:</label>
+            <span id="backup-code-4"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode5:</label>
+            <span id="backup-code-5"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode6:</label>
+            <span id="backup-code-6"></span>
+        </div>
+        <div class="backup-code">
+            <label>BackupCode7:</label>
+            <span id="backup-code-7"></span>
+        </div>
+    </div>
+    <div class="text-center">
+        <button class="btn btn-primary" onclick="saveBackupCodes()">Download Backup Codes</button>
+    </div>
+</div>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    // Function to generate random backup codes
+    function generateBackupCodes() {
+        for (let i = 1; i <= 7; i++) {
+            let code = Math.random().toString(36).substr(2, 8).toUpperCase();
+            document.getElementById(`backup-code-${i}`).innerText = code;
+        }
+    }
+
+    // Function to save backup codes to file
+    function saveBackupCodes() {
+        let codes = [];
+        for (let i = 1; i <= 7; i++) {
+            codes.push(document.getElementById(`backup-code-${i}`).innerText);
+        }
+        let file = new Blob([codes.join('\n')], { type: 'text/plain' });
+        let a = document.createElement('a');
+        a.href = URL.createObjectURL(file);
+        a.download = 'BackUpCodes.txt';
+        a.click();
+    }
+
+    // Generate backup codes
+    generateBackupCodes();
+</script>
+</body>
+</html>

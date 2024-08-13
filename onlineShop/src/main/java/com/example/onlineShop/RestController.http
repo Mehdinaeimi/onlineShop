@@ -1,0 +1,60 @@
+GET http://localhost:8080/api/item?id=99
+Accept: application/json
+
+###
+@RestController
+@RequestMapping("/api/products")
+public class ProductController {
+    @Autowired
+    private ProductRepository productRepository;
+
+    @GetMapping
+    public ResponseEntity<List<Product>> retrieveAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> retrieveProductById(@PathVariable Long id) {
+        Product product = productRepository.findById(id).orElseThrow();
+        return ResponseEntity.ok(product);
+    }
+}
+
+@RestController
+@RequestMapping("/api/customers")
+public class CustomerController {
+    @Autowired
+    private CustomerRepository customerRepository;
+
+    @GetMapping
+    public ResponseEntity<List<Customer>> retrieveAllCustomers() {
+        List<Customer> customers = customerRepository.findAll();
+        return ResponseEntity.ok(customers);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Customer> retrieveCustomerById(@PathVariable Long id) {
+        Customer customer = customerRepository.findById(id).orElseThrow();
+        return ResponseEntity.ok(customer);
+    }
+}
+
+@RestController
+@RequestMapping("/api/orders")
+public class OrderController {
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @GetMapping
+    public ResponseEntity<List<Order>> retrieveAllOrders() {
+        List<Order> orders = orderRepository.findAll();
+        return ResponseEntity.ok(orders);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Order> retrieveOrderById(@PathVariable Long id) {
+        Order order = orderRepository.findById(id).orElseThrow();
+        return ResponseEntity.ok(order);
+    }
+}
